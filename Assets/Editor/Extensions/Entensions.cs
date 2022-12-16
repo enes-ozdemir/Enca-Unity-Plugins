@@ -8,7 +8,7 @@ namespace Editor.Extensions
         public static int ToInt(this float floatNumber) => Convert.ToInt32(floatNumber);
         public static int ToInt(this double doubleNumber) => Convert.ToInt32(doubleNumber);
 
-        public static T SelectRandomItemFromList<T>(this List<T> list)
+        public static T SelectRandomItem<T>(this List<T> list)
         {
             if (list.Count == 0)
             {
@@ -17,6 +17,10 @@ namespace Editor.Extensions
 
             var randomIndex = Random.GetRandomNumber(list.Count).ToInt();
             return list[randomIndex];
+        }
+        
+        public static T SelectRandomItem<T>(this T[] array) {
+            return array[Random.GetRandomNumber(array.Length).ToInt()];
         }
     }
 }
