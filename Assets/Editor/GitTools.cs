@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEngine.Application;
 
-public static class GitEditor
+public static class GitTools
 {
     private static string fileName = ".gitignore";
     
@@ -31,7 +31,7 @@ public static class GitEditor
             try
             {
                 File.AppendAllText(file.ToString(),currentContent);
-               // streamWriter.WriteLine(currentContent);
+                // streamWriter.WriteLine(currentContent);
 
             }
             catch (Exception e)

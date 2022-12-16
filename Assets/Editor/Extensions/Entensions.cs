@@ -5,10 +5,9 @@ namespace Editor.Extensions
 {
     public static class Entensions
     {
-        
         public static int ToInt(this float floatNumber) => Convert.ToInt32(floatNumber);
         public static int ToInt(this double doubleNumber) => Convert.ToInt32(doubleNumber);
-        
+
         public static T SelectRandomItemFromList<T>(this List<T> list)
         {
             if (list.Count == 0)

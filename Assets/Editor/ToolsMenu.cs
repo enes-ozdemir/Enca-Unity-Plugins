@@ -4,22 +4,25 @@ using static System.IO. Path;
 using static UnityEditor.AssetDatabase;
 using static UnityEngine.Application;
 
-public static class ToolsMenu
+namespace Editor
 {
-
-    [MenuItem("EncaPlugins/Setup/Create Default Folders")]
-    public static void CreateDefaultFolders()
+    public static class ToolsMenu
     {
-        CreateDirectories(dataPath,"Scripts","Art","Scenes");
-        Refresh();
-    }
 
-    private static void CreateDirectories(string root, params string[] directoryList)
-    {
-        foreach (var directory in directoryList)
+        [MenuItem("EncaPlugins/Setup/Create Default Folders")]
+        public static void CreateDefaultFolders()
         {
-            CreateDirectory(Combine(root, directory));
+            CreateDirectories(dataPath,"Scripts","Art","Scenes");
+            Refresh();
         }
-    }
 
+        private static void CreateDirectories(string root, params string[] directoryList)
+        {
+            foreach (var directory in directoryList)
+            {
+                CreateDirectory(Combine(root, directory));
+            }
+        }
+
+    }
 }
