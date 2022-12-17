@@ -8,7 +8,6 @@ namespace Editor
 {
     public static class ToolsMenu
     {
-
         [MenuItem("EncaPlugins/Setup/Create Default Folders")]
         public static void CreateDefaultFolders()
         {

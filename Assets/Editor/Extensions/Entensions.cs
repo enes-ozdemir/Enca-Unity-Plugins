@@ -18,6 +18,12 @@ namespace Editor.Extensions
         public static int ToInt(this double doubleNumber) => Convert.ToInt32(doubleNumber);
 
         /// <summary>
+        ///     Convert String value to Integer.
+        /// </summary>
+        /// <param name="text"></param>
+        public static int ToInt(this string text) => Convert.ToInt32(text);
+
+        /// <summary>
         ///     Get random item from given list.
         /// </summary>
         /// <param name="List"></param>
