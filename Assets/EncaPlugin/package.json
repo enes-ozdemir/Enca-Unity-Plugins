@@ -1,0 +1,17 @@
+{
+  "name": "com.enesozdemir.enca-plugin",
+  "version": "0.0.1",
+  "displayName": "Enca Plugin",
+  "description": "Small extensions that I find useful in my projects.",
+  "keywords": [
+    "library",
+    "utility",
+    "setup"
+  ],
+  "author": {
+    "name": "Enes Ozdemir",
+    "email": "enesozdemir6167@hotmail.com",
+    "url": "https://github.com/enes-ozdemir"
+  },
+  "type": "tool"
+}

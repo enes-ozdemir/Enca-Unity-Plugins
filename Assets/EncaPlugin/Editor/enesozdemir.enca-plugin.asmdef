@@ -1,5 +1,5 @@
 {
-    "name": "enesozdemir.EncaPlugins",
+    "name": "enesozdemir.enca-plugin",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [
