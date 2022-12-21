@@ -16,7 +16,10 @@
 # Ignore assets
 /[Aa]ssets/Asset
 /[Aa]ssets/Plugins
-
+ProjectSettings
+Packages
+UserSettings
+.idea
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
