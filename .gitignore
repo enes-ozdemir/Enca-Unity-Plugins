@@ -20,8 +20,7 @@ ProjectSettings
 Packages
 UserSettings
 .idea
-#Assets
-aAssets
+Assets
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
