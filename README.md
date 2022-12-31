@@ -5,6 +5,8 @@ As I work on various projects, I will be adding new features and improving exist
 
 ## Version Change History
 
+V0.1.2 -> "Added Debug class for more user-friendly debug messages."
+</br>
 V0.1.1 -> SelectRandomItemFromList extension method and ToInt extension methods added.
 </br>
 V0.1 -> Creating directories added
