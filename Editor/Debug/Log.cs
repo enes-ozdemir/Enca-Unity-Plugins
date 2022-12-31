@@ -9,9 +9,10 @@
             if (_showInfoLogs) UnityEngine.Debug.Log($"<color=turquoise>{message}</color>");
         }
 
-        public static void Info(object message, bool showInfoLog)
+        public static void Info(object message, string name)
         {
-            if (showInfoLog) UnityEngine.Debug.Log($"<color=turquoise>{message}</color>");
+            if (_showInfoLogs)
+                UnityEngine.Debug.Log($"<color=lightblue><b>{name}: </b></color>{message}");
         }
 
         public static void Error(object message) => UnityEngine.Debug.Log($"<color=red>{message}</color>");
