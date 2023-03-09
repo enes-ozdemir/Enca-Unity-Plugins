@@ -1,4 +1,4 @@
-namespace Editor.Extensions
+namespace Enca.Extensions
 {
     public static class Random
     {

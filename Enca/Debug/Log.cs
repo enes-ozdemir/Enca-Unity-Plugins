@@ -1,4 +1,4 @@
-﻿namespace Editor.Debug
+﻿namespace Enca.Debug
 {
     public static class Log
     {

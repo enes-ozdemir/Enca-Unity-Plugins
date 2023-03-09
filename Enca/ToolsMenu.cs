@@ -5,7 +5,7 @@ using static System.IO.Path;
 using static UnityEditor.AssetDatabase;
 using static UnityEngine.Application;
 
-namespace Editor
+namespace Enca
 {
     public static class ToolsMenu
     {

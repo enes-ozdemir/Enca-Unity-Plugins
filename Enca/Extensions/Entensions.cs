@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Random = Enca.Extensions.Random;
 
-namespace Editor.Extensions
+namespace Enca.Extensions
 {
     public static class Entensions
     {
