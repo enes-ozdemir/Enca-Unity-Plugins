@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Editor.Utilities
+namespace Enca.Editor.Utilities
 {
     public static class Utils
     {

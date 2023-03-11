@@ -1,4 +1,4 @@
-﻿namespace Editor.Utilities
+﻿namespace Enca.Editor.Utilities
 {
     using UnityEngine;
 
