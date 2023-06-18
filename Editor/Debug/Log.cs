@@ -2,23 +2,13 @@
 {
     public static class Log
     {
-        private static bool _showInfoLogs = true;
+        private static readonly Logger GlobalLogger = new("Global");
 
-        public static void Info(object message)
-        {
-            if (_showInfoLogs) UnityEngine.Debug.Log($"<color=turquoise>{message}</color>");
-        }
+        public static void Info(object message) => GlobalLogger.Info(message);
+        public static void Error(object message) => GlobalLogger.Error(message);
+        public static void Warning(object message) => GlobalLogger.Warning(message);
 
-        public static void Info(object message, string name)
-        {
-            if (_showInfoLogs)
-                UnityEngine.Debug.Log($"<color=lightblue><b>{name}: </b></color>{message}");
-        }
-
-        public static void Error(object message) => UnityEngine.Debug.Log($"<color=red>{message}</color>");
-        public static void Warning(object message) => UnityEngine.Debug.Log($"<color=yellow>{message}</color>");
-
-        public static void ShowInfoLogs() => _showInfoLogs = true;
-        public static void HideInfoLogs() => _showInfoLogs = false;
+        public static void EnableInfoLogs() => GlobalLogger.EnableInfoLogs();
+        public static void DisableInfoLogs() => GlobalLogger.DisableInfoLogs();
     }
 }
