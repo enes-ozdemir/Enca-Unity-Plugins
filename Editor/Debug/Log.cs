@@ -2,7 +2,7 @@
 {
     public static class Log
     {
-        private static readonly Logger GlobalLogger = new("Global");
+        private static readonly Logger GlobalLogger = new("");
 
         public static void Info(object message) => GlobalLogger.Info(message);
         public static void Error(object message) => GlobalLogger.Error(message);
