@@ -7,5 +7,11 @@ namespace Enca.Extensions
         /// </summary>
         /// <param name="limitNumber"></param>
         public static float GetRandomNumber(float limitNumber) => UnityEngine.Random.Range(0, limitNumber);
+        
+        /// <summary>
+        /// Returns a random boolean value.
+        /// </summary>
+        public static bool GetRandomBool() => UnityEngine.Random.value > 0.5f;
+
     }
 }
