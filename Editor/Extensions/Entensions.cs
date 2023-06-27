@@ -35,7 +35,7 @@ namespace Enca.Extensions
                 throw new InvalidOperationException("Cannot select a random item from an empty list");
             }
 
-            var randomIndex = Random.GetRandomNumber(list.Count).ToInt();
+            var randomIndex = Random.GetRandomNumber(list.Count);
             return list[randomIndex];
         }
 
@@ -45,7 +45,7 @@ namespace Enca.Extensions
         /// <param name="array"></param>
         public static T SelectRandomItem<T>(this T[] array)
         {
-            return array[Random.GetRandomNumber(array.Length).ToInt()];
+            return array[Random.GetRandomNumber(array.Length)];
         }
     }
 }
