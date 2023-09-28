@@ -4,7 +4,7 @@ using Random = Enca.Extensions.Random;
 
 namespace Enca.Extensions
 {
-    public static class Entensions
+    public static class Extensions
     {
         /// <summary>
         ///     Convert Float value to Integer.
@@ -46,6 +46,24 @@ namespace Enca.Extensions
         public static T SelectRandomItem<T>(this T[] array)
         {
             return array[Random.GetRandomNumber(array.Length)];
+        }
+
+        /// <summary>
+        /// Merges an unknown number of lists into a single list.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the lists.</typeparam>
+        /// <param name="lists">An array of lists to be merged.</param>
+        /// <returns>A new List containing all the elements from the input lists.</returns>
+        public static List<T> MergeLists<T>(params List<T>[] lists)
+        {
+            var mergedList = new List<T>();
+
+            foreach (var list in lists)
+            {
+                mergedList.AddRange(list);
+            }
+
+            return mergedList;
         }
     }
 }
