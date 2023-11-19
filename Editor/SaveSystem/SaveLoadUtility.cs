@@ -13,7 +13,7 @@ namespace Enca.SaveSystem
             await File.WriteAllTextAsync(saveData.path, json);
         }
 
-        public static async Task<SaveData> LoadAsync(SaveData saveData)
+        public static async Task LoadAsync(SaveData saveData)
         {
             if (File.Exists(saveData.path))
             {
@@ -21,12 +21,13 @@ namespace Enca.SaveSystem
                 JsonUtility.FromJsonOverwrite(json, saveData);
             }
         }
-        
-        public static void InitializeSaveData(SaveData saveData, string fileNamePrefix, int slotID=0)
+
+        public static void InitializeSaveData(SaveData saveData, string fileNamePrefix, int slotID = 0)
         {
-            if(string.IsNullOrEmpty(saveData.uniqueID))
-            saveData.uniqueID = Guid.NewGuid().ToString();
-            saveData.path = Application.persistentDataPath + "/" + fileNamePrefix + "_Slot" + slotID + "_" + saveData.uniqueID + ".json";
+            if (string.IsNullOrEmpty(saveData.uniqueID))
+                saveData.uniqueID = Guid.NewGuid().ToString();
+            saveData.path = Application.persistentDataPath + "/" + fileNamePrefix + "_Slot" + slotID + "_" +
+                            saveData.uniqueID + ".json";
         }
     }
 }

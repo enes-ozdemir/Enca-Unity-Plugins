@@ -5,8 +5,8 @@ namespace Enca.SaveSystem
 {
     public interface ISaveable
     {
-        async Task OnSaveAsync(SaveData saveData);
-        async Task<SaveData> OnLoadAsync();
+        Task OnSaveAsync();
+        Task OnLoadAsync();
     }
 
 }
