@@ -1,6 +1,6 @@
 {
   "name": "com.enesozdemir.enca-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "displayName": "Enca plugin",
   "description": "Small extensions that I find useful in my projects.",
   "keywords": [
