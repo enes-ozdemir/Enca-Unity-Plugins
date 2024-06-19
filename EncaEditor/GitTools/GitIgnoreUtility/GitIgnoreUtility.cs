@@ -6,8 +6,22 @@ using UnityEngine;
 
 public class GitIgnoreUtility : Editor
 {
-    private const string GitignoreFilePath = ".gitignore";
+    private static string gitignoreFilePath;
+    private static bool showIconsOnIgnoredFiles;
+
+    static GitIgnoreUtility()
+    {
+        gitignoreFilePath = EditorPrefs.GetString("GitignoreFilePath", ".gitignore");
+        showIconsOnIgnoredFiles = EditorPrefs.GetBool("ShowIconsOnIgnoredFiles", true);
+        UpdateSettings(gitignoreFilePath);
+    }
+
     internal static Action OnGitignoreUpdated;
+
+    public static void UpdateSettings(string newGitignoreFilePath)
+    {
+        gitignoreFilePath = newGitignoreFilePath;
+    }
 
     [MenuItem("Assets/Add to .gitignore", false, 20)]
     private static void AddToGitignore()
@@ -21,16 +35,15 @@ public class GitIgnoreUtility : Editor
 
         var relativePath = GetRelativePath(path);
 
-        if (!File.Exists(GitignoreFilePath))
-            File.Create(GitignoreFilePath).Dispose();
+        EnsureGitignoreFileExists();
 
-        using (StreamWriter sw = File.AppendText(GitignoreFilePath))
+        using (StreamWriter sw = File.AppendText(gitignoreFilePath))
         {
             sw.WriteLine(relativePath);
         }
 
         OnGitignoreUpdated?.Invoke();
-        Debug.Log($"{relativePath} has been added to {GitignoreFilePath}");
+        Debug.Log($"{relativePath} has been added to {gitignoreFilePath}");
     }
 
     [MenuItem("Assets/Remove from .gitignore", false, 21)]
@@ -45,23 +58,41 @@ public class GitIgnoreUtility : Editor
 
         var relativePath = GetRelativePath(path);
 
-        if (!File.Exists(GitignoreFilePath))
+        if (!File.Exists(gitignoreFilePath))
         {
-            Debug.LogError($"{GitignoreFilePath} does not exist.");
+            Debug.LogError($"{gitignoreFilePath} does not exist.");
             return;
         }
 
-        var entries = new List<string>(File.ReadAllLines(GitignoreFilePath));
+        var entries = new List<string>(File.ReadAllLines(gitignoreFilePath));
         if (entries.Contains(relativePath))
         {
             entries.Remove(relativePath);
-            File.WriteAllLines(GitignoreFilePath, entries);
-            Debug.Log($"{relativePath} has been removed from {GitignoreFilePath}");
+            File.WriteAllLines(gitignoreFilePath, entries);
+            Debug.Log($"{relativePath} has been removed from {gitignoreFilePath}");
             OnGitignoreUpdated?.Invoke();
         }
         else
         {
-            Debug.LogWarning($"{relativePath} is not in {GitignoreFilePath}");
+            Debug.LogWarning($"{relativePath} is not in {gitignoreFilePath}");
+        }
+    }
+
+    private static void EnsureGitignoreFileExists()
+    {
+        if (!File.Exists(gitignoreFilePath))
+        {
+            var defaultGitignoreFullPath = Path.Combine(Application.dataPath, "../", "Assets/YourPackageName/Editor/DefaultGitignore/.gitignore");
+            if (File.Exists(defaultGitignoreFullPath))
+            {
+                File.Copy(defaultGitignoreFullPath, gitignoreFilePath);
+                Debug.Log($"{gitignoreFilePath} has been created using the default template.");
+            }
+            else
+            {
+                File.Create(gitignoreFilePath).Dispose();
+                Debug.Log($"{gitignoreFilePath} has been created as an empty file.");
+            }
         }
     }
 
@@ -106,9 +137,9 @@ public class GitIgnoreUtility : Editor
 
     private static bool IsInGitignore(string relativePath)
     {
-        if (File.Exists(GitignoreFilePath))
+        if (File.Exists(gitignoreFilePath))
         {
-            var entries = new List<string>(File.ReadAllLines(GitignoreFilePath));
+            var entries = new List<string>(File.ReadAllLines(gitignoreFilePath));
             return entries.Contains(relativePath);
         }
         return false;
