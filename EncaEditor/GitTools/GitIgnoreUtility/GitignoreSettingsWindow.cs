@@ -5,7 +5,7 @@ using UnityEngine;
 public class GitignoreSettingsWindow : EditorWindow
 {
     private string _gitignoreFilePath = ".gitignore";
-
+    
     [MenuItem("Tools/Gitignore Settings")]
     public static void ShowWindow()
     {

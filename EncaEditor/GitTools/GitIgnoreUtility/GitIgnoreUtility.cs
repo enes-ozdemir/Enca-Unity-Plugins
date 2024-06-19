@@ -7,12 +7,11 @@ using UnityEngine;
 public class GitIgnoreUtility : Editor
 {
     private static string gitignoreFilePath;
-    private static bool showIconsOnIgnoredFiles;
+    //todo add default gitIgnore
 
     static GitIgnoreUtility()
     {
         gitignoreFilePath = EditorPrefs.GetString("GitignoreFilePath", ".gitignore");
-        showIconsOnIgnoredFiles = EditorPrefs.GetBool("ShowIconsOnIgnoredFiles", true);
         UpdateSettings(gitignoreFilePath);
     }
 
