@@ -6,20 +6,20 @@ using UnityEngine;
 
 public class GitIgnoreUtility : Editor
 {
-    private static string gitignoreFilePath;
-    //todo add default gitIgnore
+    private static string _gitIgnoreFilePath;
+    private static string _defaultGitIgnoreFilePath = "Resources/.gitignore";
 
     static GitIgnoreUtility()
     {
-        gitignoreFilePath = EditorPrefs.GetString("GitignoreFilePath", ".gitignore");
-        UpdateSettings(gitignoreFilePath);
+        _gitIgnoreFilePath = EditorPrefs.GetString("GitignoreFilePath", ".gitignore");
+        UpdateSettings(_gitIgnoreFilePath);
     }
 
     internal static Action OnGitignoreUpdated;
 
     public static void UpdateSettings(string newGitignoreFilePath)
     {
-        gitignoreFilePath = newGitignoreFilePath;
+        _gitIgnoreFilePath = newGitignoreFilePath;
     }
 
     [MenuItem("Assets/Add to .gitignore", false, 20)]
@@ -36,13 +36,13 @@ public class GitIgnoreUtility : Editor
 
         EnsureGitignoreFileExists();
 
-        using (StreamWriter sw = File.AppendText(gitignoreFilePath))
+        using (StreamWriter sw = File.AppendText(_gitIgnoreFilePath))
         {
             sw.WriteLine(relativePath);
         }
 
         OnGitignoreUpdated?.Invoke();
-        Debug.Log($"{relativePath} has been added to {gitignoreFilePath}");
+        Debug.Log($"{relativePath} has been added to {_gitIgnoreFilePath}");
     }
 
     [MenuItem("Assets/Remove from .gitignore", false, 21)]
@@ -57,40 +57,40 @@ public class GitIgnoreUtility : Editor
 
         var relativePath = GetRelativePath(path);
 
-        if (!File.Exists(gitignoreFilePath))
+        if (!File.Exists(_gitIgnoreFilePath))
         {
-            Debug.LogError($"{gitignoreFilePath} does not exist.");
+            Debug.LogError($"{_gitIgnoreFilePath} does not exist.");
             return;
         }
 
-        var entries = new List<string>(File.ReadAllLines(gitignoreFilePath));
+        var entries = new List<string>(File.ReadAllLines(_gitIgnoreFilePath));
         if (entries.Contains(relativePath))
         {
             entries.Remove(relativePath);
-            File.WriteAllLines(gitignoreFilePath, entries);
-            Debug.Log($"{relativePath} has been removed from {gitignoreFilePath}");
+            File.WriteAllLines(_gitIgnoreFilePath, entries);
+            Debug.Log($"{relativePath} has been removed from {_gitIgnoreFilePath}");
             OnGitignoreUpdated?.Invoke();
         }
         else
         {
-            Debug.LogWarning($"{relativePath} is not in {gitignoreFilePath}");
+            Debug.LogWarning($"{relativePath} is not in {_gitIgnoreFilePath}");
         }
     }
 
     private static void EnsureGitignoreFileExists()
     {
-        if (!File.Exists(gitignoreFilePath))
+        if (!File.Exists(_gitIgnoreFilePath))
         {
             var defaultGitignoreFullPath = Path.Combine(Application.dataPath, "../", "Assets/YourPackageName/Editor/DefaultGitignore/.gitignore");
             if (File.Exists(defaultGitignoreFullPath))
             {
-                File.Copy(defaultGitignoreFullPath, gitignoreFilePath);
-                Debug.Log($"{gitignoreFilePath} has been created using the default template.");
+                File.Copy(defaultGitignoreFullPath, _gitIgnoreFilePath);
+                Debug.Log($"{_gitIgnoreFilePath} has been created using the default template.");
             }
             else
             {
-                File.Create(gitignoreFilePath).Dispose();
-                Debug.Log($"{gitignoreFilePath} has been created as an empty file.");
+                File.Create(_gitIgnoreFilePath).Dispose();
+                Debug.Log($"{_gitIgnoreFilePath} has been created as an empty file.");
             }
         }
     }
@@ -136,9 +136,9 @@ public class GitIgnoreUtility : Editor
 
     private static bool IsInGitignore(string relativePath)
     {
-        if (File.Exists(gitignoreFilePath))
+        if (File.Exists(_gitIgnoreFilePath))
         {
-            var entries = new List<string>(File.ReadAllLines(gitignoreFilePath));
+            var entries = new List<string>(File.ReadAllLines(_gitIgnoreFilePath));
             return entries.Contains(relativePath);
         }
         return false;
