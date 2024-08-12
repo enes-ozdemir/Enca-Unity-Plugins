@@ -64,14 +64,14 @@ public class GitIgnoreSettingsWindow : EditorWindow
 
     private void HandleExistingGitIgnoreFile()
     {
-        var userConfirmedOverwrite  = EditorUtility.DisplayDialog(
+        var userConfirmedOverwrite = EditorUtility.DisplayDialog(
             "Create New default Unity .gitignore",
             "Attention!! .gitignore file already exists for this project. Do you want to overwrite it? \nYou will lose all of your custom entries inside the .gitIgnore File.",
             "Yes", "No"
         );
 
         if (!userConfirmedOverwrite) return;
-        
+
         CreateNewGitIgnoreFile();
         GitIgnoreUtility.OnGitignoreUpdated?.Invoke();
     }
