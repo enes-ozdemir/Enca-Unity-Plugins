@@ -21,7 +21,6 @@ public class GitignoreSettingsWindow : EditorWindow
     {
         GUILayout.Label("Gitignore Settings", EditorStyles.boldLabel);
 
-        // Gitignore file path
         GUILayout.Label("Gitignore File Path", EditorStyles.label);
         _gitignoreFilePath = GUILayout.TextField(_gitignoreFilePath);
         if (GUILayout.Button("Browse"))
@@ -33,13 +32,11 @@ public class GitignoreSettingsWindow : EditorWindow
             }
         }
 
-
         if (GUILayout.Button("Save Settings"))
         {
             SaveSettings();
         }
 
-        // Open .gitignore file
         if (GUILayout.Button("Open .gitignore File"))
         {
             if (File.Exists(_gitignoreFilePath))

@@ -7,26 +7,27 @@ using System.Collections.Generic;
 public class GitignoreOverlay
 {
     private static GUIContent folderIgnoredIcon;
-    private static HashSet<string> gitignoreEntries = new HashSet<string>(); 
+    private static HashSet<string> gitignoreEntries = new HashSet<string>();
+    private const string ImageName = "d_winbtn_mac_close_h@2x";
 
     static GitignoreOverlay()
     {
-        folderIgnoredIcon = EditorGUIUtility.IconContent("d_winbtn_mac_close_h@2x");
+        folderIgnoredIcon = EditorGUIUtility.IconContent(ImageName);
         UpdateGitignoreEntries();
         EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
         GitIgnoreUtility.OnGitignoreUpdated += UpdateGitignoreEntries;
         AssetDatabase.Refresh();
     }
-    
+
     private static void UpdateGitignoreEntries()
     {
         gitignoreEntries.Clear();
         if (File.Exists(".gitignore"))
         {
-            string[] entries = File.ReadAllLines(".gitignore");
+            var entries = File.ReadAllLines(".gitignore");
             foreach (string entry in entries)
             {
-                string trimmedEntry = entry.Trim();
+                var trimmedEntry = entry.Trim();
                 if (!string.IsNullOrEmpty(trimmedEntry))
                 {
                     // Convert to relative path if necessary
@@ -34,6 +35,7 @@ public class GitignoreOverlay
                     {
                         trimmedEntry = "Assets/" + trimmedEntry;
                     }
+
                     gitignoreEntries.Add(trimmedEntry);
                 }
             }
@@ -42,8 +44,8 @@ public class GitignoreOverlay
 
     private static void OnProjectWindowItemGUI(string guid, Rect selectionRect)
     {
-        string path = AssetDatabase.GUIDToAssetPath(guid);
-        
+        var path = AssetDatabase.GUIDToAssetPath(guid);
+
         if (IsInGitignore(path))
         {
             Rect iconRect = new Rect(selectionRect.x + selectionRect.width - 16, selectionRect.y, 16, 16);
@@ -72,6 +74,7 @@ public class GitignoreOverlay
                 }
             }
         }
+
         return false;
     }
 }
