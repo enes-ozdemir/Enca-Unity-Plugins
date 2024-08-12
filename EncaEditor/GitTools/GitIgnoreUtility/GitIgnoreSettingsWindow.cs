@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class GitignoreSettingsWindow : EditorWindow
+public class GitIgnoreSettingsWindow : EditorWindow
 {
     private string _gitignoreFilePath = ".gitignore";
 
@@ -13,7 +13,7 @@ public class GitignoreSettingsWindow : EditorWindow
     [MenuItem("Tools/Gitignore Settings")]
     public static void ShowWindow()
     {
-        GetWindow<GitignoreSettingsWindow>("Gitignore Settings");
+        GetWindow<GitIgnoreSettingsWindow>("Gitignore Settings");
     }
 
     private void OnEnable()
