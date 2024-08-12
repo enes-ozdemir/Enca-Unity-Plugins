@@ -8,7 +8,7 @@ public class GitignoreOverlay
 {
     private static GUIContent folderIgnoredIcon;
     private static HashSet<string> gitignoreEntries = new HashSet<string>();
-    private const string ImageName = "d_winbtn_mac_close_h@2x";
+    private const string ImageName = "SceneViewVisibility@2x";
 
     static GitignoreOverlay()
     {
